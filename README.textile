@@ -36,4 +36,4 @@ This template installs a highly opinionated Rails stack
 
 There is more. Be sure to have a look at install.rb for the full scoop.
 
-Liek I said this is not a template for the masses. Feel free to fork and make it suit your needs.
+Like I said this is not a template for the masses. Feel free to fork and make it suit your needs.
