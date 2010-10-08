@@ -6,7 +6,7 @@ app_dir = "~/Desktop/Code/apps/#{app_name}"
 which_ruby = ask("Which rvm Ruby do you want to use?")
 static_pages = yes?("Do you need static pages? (yes/no)")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No")
-git_files = "http://github.com/activestylus/rails3_mongo_template/raw/master/files/"
+git_dir = "http://github.com/activestylus/rails3_mongo_template/raw/master/"
 deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku")
 tdir = "~/rails3_mongoid_template"
 #----------------------------------------------------------------------------
@@ -21,7 +21,7 @@ RVM
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
 #----------------------------------------------------------------------------
-apply "#{tdir}/actions/clear_unnecessary_rails_files.rb"
+apply "#{git_dir}/actions/clear_unnecessary_rails_files.rb"
 
 #----------------------------------------------------------------------------
 # Generators
@@ -60,12 +60,12 @@ end
 
 inside "app/controllers" do
   remove_file "application_controller.rb"
-  get "#{git_files}application_controller.sass", "application_controller.rb"
+  get "#{git_dir}files/application_controller.sass", "application_controller.rb"
 end
 
 inside "config/initializers" do
-  get "#{git_files}simple_form.rb", "simple_form.rb"
-  get "#{git_files}string.rb", "string.rb"
+  get "#{git_dir}files/simple_form.rb", "simple_form.rb"
+  get "#{git_dir}files/string.rb", "string.rb"
 end
 
 #----------------------------------------------------------------------------
@@ -78,14 +78,14 @@ if yes?("Do you want to use CarrierWave for file attachments?")
   gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git'
   gem 'rmagick', :require => 'RMagick'
   inside "config/initializers" do
-    get "#{git_files}carrierwave.rb", "carrierwave.rb"
+    get "#{git_dir}files/carrierwave.rb", "carrierwave.rb"
   end
 end
 if chosen_auth=="1"
   gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
   gem 'warden'
   inside "config/initializers" do
-    get "#{git_files}devise.rb", "devise.rb"
+    get "#{git_dir}files/devise.rb", "devise.rb"
     gsub_file 'devise.rb', /# config.mailer_sender/ do
       "config.mailer_sender = '#{ask("What email address will this app send mail from?")}'"
     end
@@ -143,14 +143,14 @@ GEM
 #----------------------------------------------------------------------------
 # Setup Compass and RightJS
 #----------------------------------------------------------------------------
-apply "#{tdir}/setup_compass_and_rightjs.rb"
+apply "#{git_dir}actions/setup_compass_and_rightjs.rb"
 
 #----------------------------------------------------------------------------
 # Layout
 #----------------------------------------------------------------------------
 inside "app/views/layouts" do
   remove_file "application.html.erb"
-  get "#{git_files}application.html.haml", "application.html.haml"
+  get "#{git_dir}files/application.html.haml", "application.html.haml"
 end
 
 #----------------------------------------------------------------------------
@@ -170,7 +170,7 @@ end
 #----------------------------------------------------------------------------
 # Setup Git
 #----------------------------------------------------------------------------
-get "#{git_files}gitignore", ".gitignore"
+get "#{git_dir}files/gitignore", ".gitignore"
 git :init
 git :add => "."
 git :commit => "-a -m 'First commit'"
