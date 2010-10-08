@@ -1,0 +1,39 @@
+h1. Rails3 MongoID Template
+
+This template installs a highly opinionated Rails stack
+
+*Testing*
+* Capybara
+* Cucumber
+* Machinist
+* Pickle
+* Shoulda
+
+*ORM*
+* MongoID
+
+*File Uploads (optional)*
+* CarrierWave
+* Mongo GridFS
+* Prawn
+
+*Javascript Framework*
+* RightJS
+* RightJS UI Components
+
+*Templates, Builders & Styling*
+* Haml
+* Sass
+* Compass
+* Simple Form
+
+*Controllers*
+* Inherited Resources
+* Has Scope
+
+*Deployment*
+* Choice of Capistrano or Heroku
+
+There is more. Be sure to have a look at install.rb for the full scoop.
+
+Liek I said this is not a template for the masses. Feel free to fork and make it suit your needs.

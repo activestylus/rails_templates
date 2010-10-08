@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title= yield :title
+    = stylesheet_link_tag "compiled/screen"
+    = javascript_include_tag "right"
+    = yield :javascripts
+    = csrf_meta_tag
+  %body
+    = yield
