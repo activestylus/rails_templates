@@ -1,13 +1,13 @@
 #----------------------------------------------------------------------------
 # Gather Basic Info
 #----------------------------------------------------------------------------
-app_name = ask("What is your application name?")
+app_name = ask("What is your application name?\r\n")
 app_dir = "~/Desktop/Code/apps/#{app_name}"
-which_ruby = ask("Which rvm Ruby do you want to use?")
-static_pages = yes?("Do you need static pages? (yes/no)")
-chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No")
+which_ruby = ask("Which rvm Ruby do you want to use?\r\n")
+static_pages = yes?("Do you need static pages? (yes/no)\r\n")
+chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n")
 git_dir = "http://github.com/activestylus/rails3_mongo_template/raw/master/"
-deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku")
+deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku\r\n")
 tdir = "~/rails3_mongoid_template"
 #----------------------------------------------------------------------------
 # Setup RVM
@@ -74,7 +74,7 @@ end
 gem 'bson_ext'
 gem 'compass'
 gem 'current'
-if yes?("Do you want to use CarrierWave for file attachments?")
+if yes?("Do you want to use CarrierWave for file attachments?\r\n")
   gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git'
   gem 'rmagick', :require => 'RMagick'
   inside "config/initializers" do
@@ -87,7 +87,7 @@ if chosen_auth=="1"
   inside "config/initializers" do
     get "#{git_dir}files/devise.rb", "devise.rb"
     gsub_file 'devise.rb', /# config.mailer_sender/ do
-      "config.mailer_sender = '#{ask("What email address will this app send mail from?")}'"
+      "config.mailer_sender = '#{ask("What email address will this app send mail from?\r\n")}'"
     end
   end
 end
@@ -159,12 +159,16 @@ end
 run "bundle install"
 
 #----------------------------------------------------------------------------
-# Further Gem Installations
+# Further Installations
 #----------------------------------------------------------------------------
 run "ruby script/generate cucumber"
 run "rails generate mongoid:config"
 if deploy_method == "1"
   run "capify ."
+end
+if static_pages
+  generate :controller, "static index"  
+  route "map.root :controller => 'static'"
 end
 
 #----------------------------------------------------------------------------
