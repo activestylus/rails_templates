@@ -161,6 +161,9 @@ run "bundle install"
 #----------------------------------------------------------------------------
 # Further Installations
 #----------------------------------------------------------------------------
+if yes?("Do you want to print PDFs?")
+  plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
+end
 run "ruby script/generate cucumber"
 run "rails generate mongoid:config"
 if deploy_method == "1"
