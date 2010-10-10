@@ -27,7 +27,7 @@ end
 # Install Style Goodies
 #----------------------------------------------------------------------------
 puts "=" * 80
-puts "=" * 80"
+puts "Install Sass Tools"
 puts "=" * 80
 run "mkdir app/stylesheets"
 inside "app/stylesheets" do
