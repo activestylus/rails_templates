@@ -6,7 +6,7 @@ app_dir = "~/Desktop/Code/apps/#{app_name}"
 which_ruby = ask("Which rvm Ruby do you want to use?\r\n")
 static_pages = yes?("Do you need static pages? (yes/no)\r\n")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n")
-git_dir = "http://github.com/activestylus/rails3_mongo_template/raw/master/"
+git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
 deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku\r\n")
 tdir = "~/rails3_mongoid_template"
 #----------------------------------------------------------------------------
