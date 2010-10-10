@@ -23,7 +23,7 @@ end
 #----------------------------------------------------------------------------
 # Install Compass & Style Goodies
 #----------------------------------------------------------------------------
-run "compass init rails #{app_dir}"
+run "compass init rails ."
 inside "app/stylesheets" do
   run "mkdir tools"
   inside "tools" do
