@@ -1,6 +1,8 @@
 h1. Rails3 MongoID Template
 
-This template installs a highly opinionated Rails stack
+This template installs a highly opinionated Rails stack meant for my own personal use. To use it you will have to modify actions/setup_compass_and_rightjs.rb and put the right path to your app.
+
+h1. What's Included
 
 *Testing*
 * Capybara

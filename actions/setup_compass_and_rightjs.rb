@@ -25,7 +25,7 @@ end
 # Install Compass & Style Goodies
 #----------------------------------------------------------------------------
 puts "Setting up Compass..."
-run "compass init rails ."
+run "compass init rails /Users/home/Desktop/Code/#{app_name}"
 inside "app/stylesheets" do
   puts "Downloading Sass tools..."
   run "mkdir tools"
