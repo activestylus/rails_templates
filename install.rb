@@ -1,10 +1,9 @@
 #----------------------------------------------------------------------------
 # Gather Basic Info
 #----------------------------------------------------------------------------
-app_name = @root.split('/').last#ask("What is your application name?\r\n")
-app_dir = "~/Desktop/Code/apps/#{app_name}"
-which_ruby = ask("Which rvm Ruby do you want to use?\r\n")
-static_pages = yes?("Do you need static pages? (yes/no)\r\n")
+app_name = Rails.root.split.last.to_s
+which_ruby = ask("Which rvm Ruby do you want to use?\r\n\r\n=>")
+static_pages = yes?("Do you need static pages? (yes/no)\r\n\r\n=>")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
 git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
 deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku\r\n\r\n=>")
@@ -22,11 +21,13 @@ run "rvm use #{which_ruby}@#{app_name}"
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
 #----------------------------------------------------------------------------
+puts "Cleaning unnecessary Rails files..."
 apply "#{git_dir}actions/clear_unnecessary_rails_files.rb"
 
 #----------------------------------------------------------------------------
 # Generators
 #----------------------------------------------------------------------------
+puts "Adding generators..."
 application <<-GENERATORS
     config.generators do |g|
       g.orm :mongoid
@@ -42,6 +43,7 @@ end
 #----------------------------------------------------------------------------
 # Config
 #----------------------------------------------------------------------------
+puts "Setting up config..."
 gsub_file 'config/application.rb', /require 'rails\/all'/ do
 <<-END
 require "action_controller/railtie"
@@ -72,6 +74,7 @@ end
 #----------------------------------------------------------------------------
 # Gems
 #----------------------------------------------------------------------------
+puts "Configuring Gemfile..."
 gem 'bson_ext'
 gem 'compass'
 gem 'current'
@@ -102,7 +105,8 @@ elsif deploy_method == "2"
   gem 'heroku-autoscale', :require => 'heroku/autoscale'
 end
 gem 'inherited_resources'
-if yes?("Do you want to print PDFs? (y/n)\r\n\r\n=>")
+needs_pdf = yes?("Do you want to print PDFs? (y/n)\r\n\r\n=>")
+if needs_pdf
   gem 'mime-types'
   gem 'prawn'
 end
@@ -140,10 +144,6 @@ group :test do
   gem 'spork'
 end
 GEM
-#----------------------------------------------------------------------------
-# Setup Compass and RightJS
-#----------------------------------------------------------------------------
-apply "#{git_dir}actions/setup_compass_and_rightjs.rb"
 
 #----------------------------------------------------------------------------
 # Layout
@@ -156,20 +156,29 @@ end
 #----------------------------------------------------------------------------
 # Bundle Gems
 #----------------------------------------------------------------------------
+puts "Bundling gems..."
 run "rvmsudo bundle install"
+
+#----------------------------------------------------------------------------
+# Setup Compass and RightJS
+#----------------------------------------------------------------------------
+apply "#{git_dir}actions/setup_compass_and_rightjs.rb"
 
 #----------------------------------------------------------------------------
 # Further Installations
 #----------------------------------------------------------------------------
-if yes?("Do you want to print PDFs? (yes/no)\r\n\r\n=>")
+if needs_pdf
   plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
 end
+puts "Setting up Cucumber..."
 run "ruby script/generate cucumber"
 run "rails generate mongoid:config"
 if deploy_method == "1"
+  puts "Setting up Capistrano..."
   run "capify ."
 end
 if static_pages
+  puts "Generating static pages..."
   generate :controller, "static index"  
   route "map.root :controller => 'static'"
 end

@@ -1,6 +1,7 @@
 #----------------------------------------------------------------------------
 # Javascript (RightJS)
 #----------------------------------------------------------------------------
+puts "Downloading RightJS..."
 get "http://rightjs.org/builds/current/right.js.zip", "rightjs.zip"
 run "unzip rightjs.zip -d rightjs"
 run "mv rightjs/right.js right.js"
@@ -23,8 +24,10 @@ end
 #----------------------------------------------------------------------------
 # Install Compass & Style Goodies
 #----------------------------------------------------------------------------
+puts "Setting up Compass..."
 run "compass init rails ."
 inside "app/stylesheets" do
+  puts "Downloading Sass tools..."
   run "mkdir tools"
   inside "tools" do
     get "http://github.com/activestylus/sass_tools/raw/master/mixins.sass", "_mixins.sass"
