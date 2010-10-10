@@ -181,7 +181,7 @@ end
 puts "=" * 80
 puts "Bundle Gems"
 puts "=" * 80
-run "bundle install --relock"
+run "bundle install"
 
 #----------------------------------------------------------------------------
 # Setup Compass and RightJS
