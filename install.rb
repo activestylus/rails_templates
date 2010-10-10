@@ -6,7 +6,6 @@ which_ruby = ask("Which rvm Ruby do you want to use?\r\n\r\n=>")
 static_pages = yes?("Do you need static pages? (y/n)\r\n\r\n=>")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
 git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
-deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku\r\n\r\n=>")
 tdir = "~/rails3_mongoid_template"
 #----------------------------------------------------------------------------
 # Setup RVM
@@ -19,11 +18,6 @@ run "rvm gemset create #{app_name}"
 create_file ".rvmrc", <<-RVM
 rvm use #{which_ruby}@#{app_name}
 RVM
-run "rvm use #{which_ruby}@#{app_name}"
-run "rvmsudo gem install rake"
-run "rvmsudo gem install bundler"
-run "rvmsudo gem install rails"
-
 
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
@@ -122,11 +116,6 @@ elsif deploy_method == "2"
   gem 'heroku-autoscale', :require => 'heroku/autoscale'
 end
 gem 'inherited_resources'
-needs_pdf = yes?("Do you want to print PDFs? (y/n)\r\n\r\n=>")
-if needs_pdf
-  gem 'mime-types'
-  gem 'prawn'
-end
 gem 'mongo_session_store', :git => 'git://github.com/mattbeedle/mongo_session_store.git'
 gem 'mongoid'
 gem 'rails'
@@ -173,40 +162,6 @@ puts "=" * 80
 inside "app/views/layouts" do
   remove_file "application.html.erb"
   get "#{git_dir}files/layout.html.haml", "application.html.haml"
-end
-
-#----------------------------------------------------------------------------
-# Bundle Gems
-#----------------------------------------------------------------------------
-puts "=" * 80
-puts "Bundle Gems"
-puts "=" * 80
-run "bundle install"
-
-#----------------------------------------------------------------------------
-# Setup Compass and RightJS
-#----------------------------------------------------------------------------
-apply "#{git_dir}actions/setup_compass_and_rightjs.rb"
-
-#----------------------------------------------------------------------------
-# Further Installations
-#----------------------------------------------------------------------------
-if needs_pdf
-  plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
-end
-puts "=" * 80
-puts "Setup Cucumber"
-puts "=" * 80
-run "ruby script/generate cucumber"
-run "rails generate mongoid:config"
-if deploy_method == "1"
-  puts "Setting up Capistrano..."
-  run "capify ."
-end
-if static_pages
-  puts "Generating static pages..."
-  generate :controller, "static index"  
-  route "map.root :controller => 'static'"
 end
 
 #----------------------------------------------------------------------------
