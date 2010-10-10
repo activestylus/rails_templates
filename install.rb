@@ -60,7 +60,7 @@ end
 
 inside "app/controllers" do
   remove_file "application_controller.rb"
-  get "#{git_dir}files/application_controller.sass", "application_controller.rb"
+  get "#{git_dir}files/application_controller.rb", "application_controller.rb"
 end
 
 inside "config/initializers" do
