@@ -1,23 +1,10 @@
 #----------------------------------------------------------------------------
 # Gather Basic Info
 #----------------------------------------------------------------------------
-#app_name = Rails.root.split.last.to_s
-which_ruby = ask("Which rvm Ruby do you want to use?\r\n\r\n=>")
 static_pages = yes?("Do you need static pages? (y/n)\r\n\r\n=>")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
 git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
 tdir = "~/rails3_mongoid_template"
-#----------------------------------------------------------------------------
-# Setup RVM
-#----------------------------------------------------------------------------
-puts "=" * 80
-puts "Setup RVM"
-puts "=" * 80
-run "rvm use #{which_ruby}"
-run "rvm gemset create #{app_name}"
-create_file ".rvmrc", <<-RVM
-rvm use #{which_ruby}@#{app_name}
-RVM
 
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
