@@ -1,7 +1,9 @@
 #----------------------------------------------------------------------------
 # Javascript (RightJS)
 #----------------------------------------------------------------------------
-title "Install RightJS"
+puts "=" * 80
+puts "Install RightJS"
+puts "=" * 80
 get "http://rightjs.org/builds/current/right.js.zip", "rightjs.zip"
 run "unzip rightjs.zip -d rightjs"
 run "mv rightjs/right.js right.js"
@@ -24,7 +26,9 @@ end
 #----------------------------------------------------------------------------
 # Install Style Goodies
 #----------------------------------------------------------------------------
-title "Install Sass Toole"
+puts "=" * 80
+puts "=" * 80"
+puts "=" * 80
 run "mkdir app/stylesheets"
 inside "app/stylesheets" do
   puts "Downloading Sass tools..."
@@ -72,9 +76,4 @@ SASS
 @import rightjs/selectable.sass
 SASS
   end 
-end
-def title(text)
-  puts "=" * 80
-  puts text
-  puts "=" * 80
 end

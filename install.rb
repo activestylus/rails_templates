@@ -11,7 +11,9 @@ tdir = "~/rails3_mongoid_template"
 #----------------------------------------------------------------------------
 # Setup RVM
 #----------------------------------------------------------------------------
-title "Setup RVM"
+puts "=" * 80
+puts "Setup RVM"
+puts "=" * 80
 run "rvm use #{which_ruby}"
 run "rvm gemset create #{app_name}"
 create_file ".rvmrc", <<-RVM
@@ -26,13 +28,17 @@ run "rvmsudo gem install rails"
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
 #----------------------------------------------------------------------------
-title "Cleanup Rails Files"
+puts "=" * 80
+puts "Cleanup Rails Files"
+puts "=" * 80
 apply "#{git_dir}actions/clear_unnecessary_rails_files.rb"
 
 #----------------------------------------------------------------------------
 # Generators
 #----------------------------------------------------------------------------
-title "Add generators"
+puts "=" * 80
+puts "Add generators"
+puts "=" * 80
 application <<-GENERATORS
     config.generators do |g|
       g.orm :mongoid
@@ -48,7 +54,9 @@ end
 #----------------------------------------------------------------------------
 # Config
 #----------------------------------------------------------------------------
-title "Setup Config"
+puts "=" * 80
+puts "Setup Config"
+puts "=" * 80
 gsub_file 'config/application.rb', /require 'rails\/all'/ do
 <<-END
 require "action_controller/railtie"
@@ -79,7 +87,9 @@ end
 #----------------------------------------------------------------------------
 # Gems
 #----------------------------------------------------------------------------
-title "Setup Gemfile"
+puts "=" * 80
+puts "Setup Gemfile"
+puts "=" * 80
 remove_file "Gemfile"
 create_file "Gemfile"
 gem 'bson_ext'
@@ -157,7 +167,9 @@ GEM
 #----------------------------------------------------------------------------
 # Layout
 #----------------------------------------------------------------------------
-title "Application Layout"
+puts "=" * 80
+puts "Application Layout"
+puts "=" * 80
 inside "app/views/layouts" do
   remove_file "application.html.erb"
   get "#{git_dir}files/layout.html.haml", "application.html.haml"
@@ -166,7 +178,9 @@ end
 #----------------------------------------------------------------------------
 # Bundle Gems
 #----------------------------------------------------------------------------
-title "Bundle Gems"
+puts "=" * 80
+puts "Bundle Gems"
+puts "=" * 80
 run "bundle install --relock"
 
 #----------------------------------------------------------------------------
@@ -180,7 +194,9 @@ apply "#{git_dir}actions/setup_compass_and_rightjs.rb"
 if needs_pdf
   plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
 end
-title "Setup Cucumber"
+puts "=" * 80
+puts "Setup Cucumber"
+puts "=" * 80
 run "ruby script/generate cucumber"
 run "rails generate mongoid:config"
 if deploy_method == "1"
@@ -196,14 +212,10 @@ end
 #----------------------------------------------------------------------------
 # Setup Git
 #----------------------------------------------------------------------------
-title "Setup Git"
+puts "=" * 80
+puts "Setup Git"
+puts "=" * 80
 get "#{git_dir}files/gitignore", ".gitignore"
 git :init
 git :add => "."
 git :commit => "-a -m 'First commit'"
-
-def title(text)
-  puts "=" * 80
-  puts text
-  puts "=" * 80
-end
