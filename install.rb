@@ -104,7 +104,6 @@ gem 'inherited_resources'
 if yes?("Do you want to print PDFs?")
   gem 'mime-types'
   gem 'prawn'
-  plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
 end
 gem 'mongo_session_store', :git => 'git://github.com/mattbeedle/mongo_session_store.git'
 gem 'mongoid'
