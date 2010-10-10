@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # Gather Basic Info
 #----------------------------------------------------------------------------
-app_name = Rails.root.split.last.to_s
+#app_name = Rails.root.split.last.to_s
 which_ruby = ask("Which rvm Ruby do you want to use?\r\n\r\n=>")
 static_pages = yes?("Do you need static pages? (yes/no)\r\n\r\n=>")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
