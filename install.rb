@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 #app_name = Rails.root.split.last.to_s
 which_ruby = ask("Which rvm Ruby do you want to use?\r\n\r\n=>")
-static_pages = yes?("Do you need static pages? (yes/no)\r\n\r\n=>")
+static_pages = yes?("Do you need static pages? (y/n)\r\n\r\n=>")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
 git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
 deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku\r\n\r\n=>")
@@ -11,23 +11,28 @@ tdir = "~/rails3_mongoid_template"
 #----------------------------------------------------------------------------
 # Setup RVM
 #----------------------------------------------------------------------------
+title "Setup RVM"
 run "rvm use #{which_ruby}"
 run "rvm gemset create #{app_name}"
 create_file ".rvmrc", <<-RVM
 rvm use #{which_ruby}@#{app_name}
 RVM
 run "rvm use #{which_ruby}@#{app_name}"
+run "rvmsudo gem install rake"
+run "rvmsudo gem install bundler"
+run "rvmsudo gem install rails"
+
 
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
 #----------------------------------------------------------------------------
-puts "Cleaning unnecessary Rails files..."
+title "Cleanup Rails Files"
 apply "#{git_dir}actions/clear_unnecessary_rails_files.rb"
 
 #----------------------------------------------------------------------------
 # Generators
 #----------------------------------------------------------------------------
-puts "Adding generators..."
+title "Add generators"
 application <<-GENERATORS
     config.generators do |g|
       g.orm :mongoid
@@ -43,7 +48,7 @@ end
 #----------------------------------------------------------------------------
 # Config
 #----------------------------------------------------------------------------
-puts "Setting up config..."
+title "Setup Config"
 gsub_file 'config/application.rb', /require 'rails\/all'/ do
 <<-END
 require "action_controller/railtie"
@@ -74,7 +79,9 @@ end
 #----------------------------------------------------------------------------
 # Gems
 #----------------------------------------------------------------------------
-puts "Configuring Gemfile..."
+title "Setup Gemfile"
+remove_file "Gemfile"
+create_file "Gemfile"
 gem 'bson_ext'
 gem 'compass'
 gem 'current'
@@ -112,10 +119,12 @@ if needs_pdf
 end
 gem 'mongo_session_store', :git => 'git://github.com/mattbeedle/mongo_session_store.git'
 gem 'mongoid'
+gem 'rails'
 gem 'simple_form'
 gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git'
 
 append_file "Gemfile", <<-GEM
+
 group :production do
   gem 'smurf'
 end
@@ -148,6 +157,7 @@ GEM
 #----------------------------------------------------------------------------
 # Layout
 #----------------------------------------------------------------------------
+title "Application Layout"
 inside "app/views/layouts" do
   remove_file "application.html.erb"
   get "#{git_dir}files/layout.html.haml", "application.html.haml"
@@ -156,8 +166,8 @@ end
 #----------------------------------------------------------------------------
 # Bundle Gems
 #----------------------------------------------------------------------------
-puts "Bundling gems..."
-run "rvmsudo bundle install"
+title "Bundle Gems"
+run "bundle install --relock"
 
 #----------------------------------------------------------------------------
 # Setup Compass and RightJS
@@ -170,7 +180,7 @@ apply "#{git_dir}actions/setup_compass_and_rightjs.rb"
 if needs_pdf
   plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
 end
-puts "Setting up Cucumber..."
+title "Setup Cucumber"
 run "ruby script/generate cucumber"
 run "rails generate mongoid:config"
 if deploy_method == "1"
@@ -186,7 +196,14 @@ end
 #----------------------------------------------------------------------------
 # Setup Git
 #----------------------------------------------------------------------------
+title "Setup Git"
 get "#{git_dir}files/gitignore", ".gitignore"
 git :init
 git :add => "."
 git :commit => "-a -m 'First commit'"
+
+def title(text)
+  puts "=" * 80
+  puts text
+  puts "=" * 80
+end
