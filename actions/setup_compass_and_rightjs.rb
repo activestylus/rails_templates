@@ -10,8 +10,8 @@ chosen_widgets = ask("Which RightJS Widgets would you like to use? (answer with 
 right_widgets = %w(autocompleter calendar colorpicker in-edit lightbox rater resizable selectable slider tabs tooltips uploader)
 inside "public/javascripts" do
   right_widgets.each do |widget, index|
-    unless which_widgets == nil
-      if which_widgets == "all"
+    unless chosen_widgets == nil
+      if chosen_widgets == "all"
         get "http://rightjs.org/builds/ui/right-#{widget}.js", "right-#{widget}.js"
       elsif eval(chosen_widgets).include?(index + 1)
         get "http://rightjs.org/builds/ui/right-#{widget}.js", "right-#{widget}.js"
