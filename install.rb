@@ -1,13 +1,13 @@
 #----------------------------------------------------------------------------
 # Gather Basic Info
 #----------------------------------------------------------------------------
-app_name = ask("What is your application name?\r\n")
+app_name = @root.split('/').last#ask("What is your application name?\r\n")
 app_dir = "~/Desktop/Code/apps/#{app_name}"
 which_ruby = ask("Which rvm Ruby do you want to use?\r\n")
 static_pages = yes?("Do you need static pages? (yes/no)\r\n")
-chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n")
+chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
 git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
-deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku\r\n")
+deploy_method = ask("How will you deploy this app?\r\n\r\n1. Capistrano\r\n2. Heroku\r\n\r\n=>")
 tdir = "~/rails3_mongoid_template"
 #----------------------------------------------------------------------------
 # Setup RVM
@@ -17,6 +17,7 @@ run "rvm gemset create #{app_name}"
 create_file ".rvmrc", <<-RVM
 rvm use #{which_ruby}@#{app_name}
 RVM
+run "rvm use #{which_ruby}@#{app_name}"
 
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
@@ -74,7 +75,7 @@ end
 gem 'bson_ext'
 gem 'compass'
 gem 'current'
-if yes?("Do you want to use CarrierWave for file attachments?\r\n")
+if yes?("Do you want to use CarrierWave for file attachments? (y/n)\r\n\r\n=>")
   gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git'
   gem 'rmagick', :require => 'RMagick'
   inside "config/initializers" do
@@ -87,7 +88,7 @@ if chosen_auth=="1"
   inside "config/initializers" do
     get "#{git_dir}files/devise.rb", "devise.rb"
     gsub_file 'devise.rb', /# config.mailer_sender/ do
-      "config.mailer_sender = '#{ask("What email address will this app send mail from?\r\n")}'"
+      "config.mailer_sender = '#{ask("What email address will this app send mail from?\r\n\r\n=>")}'"
     end
   end
 end
@@ -101,7 +102,7 @@ elsif deploy_method == "2"
   gem 'heroku-autoscale', :require => 'heroku/autoscale'
 end
 gem 'inherited_resources'
-if yes?("Do you want to print PDFs?")
+if yes?("Do you want to print PDFs? (y/n)\r\n\r\n=>")
   gem 'mime-types'
   gem 'prawn'
 end
@@ -155,12 +156,12 @@ end
 #----------------------------------------------------------------------------
 # Bundle Gems
 #----------------------------------------------------------------------------
-run "bundle install"
+run "rvmsudo bundle install"
 
 #----------------------------------------------------------------------------
 # Further Installations
 #----------------------------------------------------------------------------
-if yes?("Do you want to print PDFs?")
+if yes?("Do you want to print PDFs? (yes/no)\r\n\r\n=>")
   plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
 end
 run "ruby script/generate cucumber"
