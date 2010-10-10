@@ -21,7 +21,7 @@ RVM
 #----------------------------------------------------------------------------
 # Cleanup Rails Files
 #----------------------------------------------------------------------------
-apply "#{git_dir}/actions/clear_unnecessary_rails_files.rb"
+apply "#{git_dir}actions/clear_unnecessary_rails_files.rb"
 
 #----------------------------------------------------------------------------
 # Generators
