@@ -22,10 +22,9 @@ inside "public/javascripts" do
 end
 
 #----------------------------------------------------------------------------
-# Install Compass & Style Goodies
+# Install Style Goodies
 #----------------------------------------------------------------------------
-puts "Setting up Compass..."
-run "compass init rails /Users/home/Desktop/Code/#{app_name}"
+run "mkdir app/stylesheets"
 inside "app/stylesheets" do
   puts "Downloading Sass tools..."
   run "mkdir tools"
