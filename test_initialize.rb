@@ -20,4 +20,6 @@ puts "=" * 80
 run "rvm use #{which_ruby}@#{app_name}"
 run "rvmsudo gem install rake"
 run "rvmsudo gem install bundler"
-run "bundle install"
+inside app_name do
+  run "bundle install"
+end
