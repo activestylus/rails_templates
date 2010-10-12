@@ -117,7 +117,7 @@ elsif deploy_method == "2"
 end
 gem 'inherited_resources'
 gem 'mongo_session_store', :git => 'git://github.com/mattbeedle/mongo_session_store.git'
-gem 'mongoid'
+gem 'mongoid', :git => 'git://github.com/mattbeedle/mongoid.git', :branch => 'development'
 gem 'mime-types'
 if yes?("Do you want to print PDFs? (y/n)\r\n\r\n=>")
   gem 'prawn'
