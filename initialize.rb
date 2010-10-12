@@ -14,6 +14,13 @@
 #----------------------------------------------------------------------------
 apply "#{git_dir}actions/setup_compass_and_rightjs.rb"
 
+if yes?("Do you need static pages? (y/n)\r\n\r\n=>")
+  puts "Generating static pages..."
+  generate :controller, "static index"  
+  route "map.root :controller => 'static'"
+end
+
+
 #----------------------------------------------------------------------------
 # Further Installations
 #----------------------------------------------------------------------------

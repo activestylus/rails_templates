@@ -14,7 +14,6 @@ RVM
 #----------------------------------------------------------------------------
 # Gather Basic Info
 #----------------------------------------------------------------------------
-static_pages = yes?("Do you need static pages? (y/n)\r\n\r\n=>")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
 git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
 deploy_method = ask("Which deploy method do you want to use?\r\n1. Heroku\r\n2.Capistrano\r\n\r\n=>")
@@ -169,12 +168,6 @@ puts "=" * 80
 inside "app/views/layouts" do
   remove_file "application.html.erb"
   get "#{git_dir}files/layout.html.haml", "application.html.haml"
-end
-
-if static_pages
-  puts "Generating static pages..."
-  generate :controller, "static index"  
-  route "map.root :controller => 'static'"
 end
 
 #----------------------------------------------------------------------------
