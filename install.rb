@@ -88,7 +88,7 @@ remove_file "Gemfile"
 create_file "Gemfile"
 gem 'bson_ext'
 gem 'compass'
-gem 'current'
+gem 'current', :git => 'git://github.com/activestylus/current.git'
 if yes?("Do you want to use CarrierWave for file attachments? (y/n)\r\n\r\n=>")
   gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git'
   gem 'rmagick', :require => 'RMagick'
