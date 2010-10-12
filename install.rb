@@ -126,7 +126,7 @@ if yes?("Do you want to print PDFs? (y/n)\r\n\r\n=>")
 end
 gem 'rails'
 gem 'simple_form'
-gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git'
+gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
 
 append_file "Gemfile", <<-GEM
 
