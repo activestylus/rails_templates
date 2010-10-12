@@ -17,6 +17,7 @@ RVM
 static_pages = yes?("Do you need static pages? (y/n)\r\n\r\n=>")
 chosen_auth = ask("Do you want to use authentication\r\n\r\n1. Yes, use Devise\r\n2. No\r\n\r\n=>")
 git_dir = "http://github.com/activestylus/rails3_mongoid_template/raw/master/"
+deploy_method = ask("Which deploy method do you want to use?\r\n1. Heroku\r\n2.Capistrano\r\n\r\n=>")
 tdir = "~/rails3_mongoid_template"
 
 #----------------------------------------------------------------------------
