@@ -1,4 +1,17 @@
 #----------------------------------------------------------------------------
+# Setup RVM
+#----------------------------------------------------------------------------
+which_ruby = ask("Which rvm Ruby do you want to use?\r\n\r\n=>")
+puts "=" * 80
+puts "Setup RVM"
+puts "=" * 80
+run "rvm use #{which_ruby}"
+run "rvm gemset create #{app_name}"
+create_file ".rvmrc", <<-RVM
+rvm use #{which_ruby}@#{app_name}
+RVM
+
+#----------------------------------------------------------------------------
 # Gather Basic Info
 #----------------------------------------------------------------------------
 static_pages = yes?("Do you need static pages? (y/n)\r\n\r\n=>")
@@ -105,6 +118,12 @@ end
 gem 'inherited_resources'
 gem 'mongo_session_store', :git => 'git://github.com/mattbeedle/mongo_session_store.git'
 gem 'mongoid'
+gem 'mime-types'
+if yes?("Do you want to print PDFs? (y/n)\r\n\r\n=>")
+  gem 'prawn'
+  run 'rvmsudo gem install prawn'
+  plugin 'prawnto', :git => 'git://github.com/thorny-sun/prawnto.git'
+end
 gem 'rails'
 gem 'simple_form'
 gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git'
@@ -149,6 +168,12 @@ puts "=" * 80
 inside "app/views/layouts" do
   remove_file "application.html.erb"
   get "#{git_dir}files/layout.html.haml", "application.html.haml"
+end
+
+if static_pages
+  puts "Generating static pages..."
+  generate :controller, "static index"  
+  route "map.root :controller => 'static'"
 end
 
 #----------------------------------------------------------------------------
