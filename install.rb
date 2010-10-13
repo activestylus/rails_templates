@@ -43,6 +43,7 @@ GENERATORS
 
 inside "lib" do
   git :clone => "git@github.com:activestylus/rails3_haml_scaffold_generator.git"
+  get "#{git_dir}files/useful_scopes.rb", "useful_scopes.rb"
 end
 
 #----------------------------------------------------------------------------
