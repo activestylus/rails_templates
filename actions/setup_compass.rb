@@ -31,6 +31,7 @@ inside "app/stylesheets" do
   inside "tools" do
     get "http://github.com/activestylus/sass_tools/raw/master/mixins.sass", "_mixins.sass"
     get "http://github.com/activestylus/sass_tools/raw/master/simple_form.sass", "_simple_form.sass"
+    create_file "_constants.sass"
   end
   unless chosen_widgets == nil
     run "mkdir rightjs"
@@ -51,9 +52,9 @@ inside "app/stylesheets" do
 // Utilities
 //--------------------------------------------------------
 @import compass/reset
-@import utilities/mixins.sass
-@import utilities/constants.sass
-@import utilities/form.sass
+@import tools/mixins.sass
+@import tools/constants.sass
+@import tools/simple_form.sass
 
 //--------------------------------------------------------
 // Layout
