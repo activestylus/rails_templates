@@ -1,3 +1,4 @@
+root = "http://github.com/activestylus/sass_tools/raw/master/"
 #----------------------------------------------------------------------------
 # Setup Compass
 #----------------------------------------------------------------------------
@@ -29,18 +30,18 @@ inside "app/stylesheets" do
   puts "Downloading Sass tools..."
   run "mkdir tools"
   inside "tools" do
-    get "http://github.com/activestylus/sass_tools/raw/master/mixins.sass", "_mixins.sass"
-    get "http://github.com/activestylus/sass_tools/raw/master/simple_form.sass", "_simple_form.sass"
+    get "#{root}mixins.sass", "_mixins.sass"
+    get "#{root}simple_form.sass", "_simple_form.sass"
     create_file "_constants.sass"
   end
   unless chosen_widgets == nil
     run "mkdir rightjs"
     inside "rightjs" do
-      get "http://github.com/activestylus/sass_tools/raw/master/rightjs_selectable.sass", "_selectable.sass"
+      get "#{root}rightjs_selectable.sass", "_selectable.sass"
       # Save this nifty trick for when I complete sass style for all widgets
       # right_widgets.each do |widget, index|
       #   if eval(chosen_widgets).include?(index + 1)
-      #     get "http://github.com/activestylus/sass_tools/raw/master/rightjs_#{widget}.sass", "_#{widget}.sass"
+      #     get "#{root}rightjs_#{widget}.sass", "_#{widget}.sass"
       #   end
       # end
     end

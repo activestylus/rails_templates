@@ -1,3 +1,6 @@
+puts "=" * 80
+puts "Cleanup Rails Files"
+puts "=" * 80
 remove_file 'README'
 remove_file 'config/database.yml.example'
 remove_file 'config/database.yml'
