@@ -13,7 +13,6 @@ end
 apply "#{root}actions/setup_rvm.rb"
 apply "#{root}actions/clear_unnecessary_rails_files.rb"
 apply "#{root}actions/add_haml_scaffold.rb"
-apply "#{root}actions/add_layout.rb"
 apply "#{root}actions/configure_rails.rb"
 apply "#{root}actions/setup_default_gems.rb"
 apply "#{root}actions/setup_orm.rb"
