@@ -55,6 +55,7 @@ if which_orm == "3"
     <<: *defaults
     database: #{app_name}_development
   YML
+  end
   gem 'bson_ext'
   gem 'mongo_session_store', :git => 'git://github.com/mattbeedle/mongo_session_store.git'
   gem 'mongoid', :git => 'git://github.com/mattbeedle/mongoid.git', :branch => 'development'
