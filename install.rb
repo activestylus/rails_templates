@@ -1,4 +1,4 @@
-root = "http://github.com/activestylus/rails3_templates/raw/master/"
+root = "http://github.com/activestylus/rails_templates/raw/master/"
 
 inside "app/controllers" do
   remove_file "application_controller.rb"

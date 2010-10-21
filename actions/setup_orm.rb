@@ -1,4 +1,4 @@
-root = "http://github.com/activestylus/rails3_templates/raw/master/"
+root = "http://github.com/activestylus/rails_templates/raw/master/"
 #----------------------------------------------------------------------------
 # Choose ORM
 #----------------------------------------------------------------------------
