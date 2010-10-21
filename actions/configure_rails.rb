@@ -1,4 +1,4 @@
-put "\r\n"
+puts "\r\n"
 puts "=" * 80
 puts "Configuring Rails"
 puts "=" * 80
