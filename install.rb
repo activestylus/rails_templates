@@ -17,8 +17,7 @@ apply "#{root}actions/configure_rails.rb"
 apply "#{root}actions/setup_default_gems.rb"
 apply "#{root}actions/setup_orm.rb"
 apply "#{root}actions/install_prawn.rb"
-apply "#{root}actions/setup_compass.rb"
-apply "#{root}actions/install_rightjs.rb"
+apply "#{root}actions/setup_rightjs_compass.rb"
 
 if yes?("Do you want to use CarrierWave for file attachments? (y/n)\r\n\r\n=>")
   puts "\r\n"
