@@ -2,8 +2,12 @@ root = "http://github.com/activestylus/rails_templates/raw/master/"
 #----------------------------------------------------------------------------
 # Choose ORM
 #----------------------------------------------------------------------------
-case ask("Which ORM will you be using?\r\n\r\n1. ActiveRecord\r\n2. Datamapper\r\n3. MongoID\r\n\r\n(Leave blank for ActiveRecord)\r\n\r\n=> ")
-when "2"
+which_orm = ask("Which ORM will you be using?\r\n\r\n1. ActiveRecord\r\n2. Datamapper\r\n3. MongoID\r\n\r\n(Leave blank for ActiveRecord)\r\n\r\n=> ")
+if which_orm == "1"
+  orm = "active_record"
+  railtie = "active_record"
+end
+if which_orm == "2"
   orm     = "datamapper"
   railtie = "dm-rails"
   puts "=" * 80
@@ -34,7 +38,8 @@ when "2"
   gem 'dm-observer',      DM_VERSION
   GEMFILE
   end
-when "3"
+end
+if which_orm == "3"
   orm     = "mongoid"
   railtie = "mongoid"
   puts "=" * 80
@@ -54,11 +59,6 @@ when "3"
   gem 'mongo_session_store', :git => 'git://github.com/mattbeedle/mongo_session_store.git'
   gem 'mongoid', :git => 'git://github.com/mattbeedle/mongoid.git', :branch => 'development'
 else
-  orm = "active_record"
-  railtie = "active_record"
-end
-
-if orm != "mongoid"
   apply "#{root}actions/configure_db.rb"
 end
 
