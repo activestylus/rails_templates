@@ -45,7 +45,7 @@ if yes?("Do you want to install Devise for authentication? (y/n)\r\n=> ")
   end
 end
 
-apply  "#{root}actions/setup_environment_gems.rb"
+apply  "#{root}actions/setup_env_gems.rb"
 
 #----------------------------------------------------------------------------
 # Layout
