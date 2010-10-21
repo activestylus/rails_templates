@@ -12,7 +12,7 @@ inside "public/javascripts" do
   run "rm -r rightjs"
   run "rm rightjs.zip"
 end
-chosen_widgets = ask("Which RightJS Widgets would you like to use? (answer with array [1,4,5]  \"all\" or press Enter to skip)\r\n\r\n1. Autocompleter\r\n2. Calendar\r\n3. Colorpicker\r\n4. In Place Editor\r\n5. Lightbox\r\n6. Rater\r\n7. Resizable\r\n8. Selectable\r\n9. Slider\r\n10. Tabs\r\n11. Tooltips\r\n12.Uploader\r\n\r\n=>")
+chosen_widgets = ask("Which RightJS Widgets would you like to use? (answer with array [1,4,5]  \"all\" or press Enter to skip)\r\n\r\n1. Autocompleter\r\n2. Calendar\r\n3. Colorpicker\r\n4.Dialog\r\n5. In Place Editor\r\n6. Lightbox\r\n7. Rater\r\n8. Resizable\r\n9. Selectable\r\n10. Slider\r\n11. Tabs\r\n12. Tooltips\r\n13.Uploader\r\n\r\n=>")
 right_widgets = %w(autocompleter calendar colorpicker in-edit lightbox rater resizable selectable slider tabs tooltips uploader)
 inside "public/javascripts" do
   right_widgets.each do |widget, index|
