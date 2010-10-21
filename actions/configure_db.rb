@@ -1,7 +1,7 @@
 create_file 'config/database.yml' do
 <<-YAML
 defaults: &defaults
-  adapter: #{database}
+  adapter: mysql
 
 development:
   database: #{app_name}_development
