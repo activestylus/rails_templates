@@ -10,6 +10,7 @@ group :development do
 end
 
 group :test do
+  gem 'autotest'
   gem 'autotest-rails', :require => 'autotest/rails'
   gem 'autotest-notification'
   gem 'capybara'
@@ -26,5 +27,6 @@ group :test do
   gem 'redgreen'
   gem 'shoulda'
   gem 'spork'
+  gem 'ZenTest'
 end
 GEM
