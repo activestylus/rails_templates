@@ -24,7 +24,6 @@ group :test do
   gem 'mocha'
   gem 'pickle', '0.2.11'
   gem 'rcov'
-  gem 'redgreen'
   gem 'shoulda'
   gem 'spork'
   gem 'ZenTest'
