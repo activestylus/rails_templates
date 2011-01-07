@@ -1,5 +1,5 @@
 root = "http://github.com/activestylus/sass_tools/raw/master/"
-chosen_widgets = ask("Which RightJS Widgets would you like to use? (answer with array [1,4,5]  \"all\" or press Enter to skip)\r\n\r\n1. Autocompleter\r\n2. Billboard\r\n3. Calendar\r\n4. Colorpicker\r\n5.Dialog\r\n6. In Place Editor\r\n7. Lightbox\r\n8. Rater\r\n9. Resizable\r\n10. Selectable\r\n11. Slider\r\n12. Sortable\r\n13. Tabs\r\n14. Tooltips\r\n15.Uploader\r\n\r\n=>")
+chosen_widgets = ask("Which RightJS Widgets would you like to use? (answer with array [1,4,5]  \"all\" or press Enter to skip)\r\n\r\n 1. Autocompleter\r\n 2. Billboard\r\n 3. Calendar\r\n 4. Colorpicker\r\n 5.Dialog\r\n 6. In Place Editor\r\n 7. Lightbox\r\n 8. Rater\r\n 9. Resizable\r\n10. Selectable\r\n11. Slider\r\n12. Sortable\r\n13. Tabs\r\n14. Tooltips\r\n15. Uploader\r\n\r\n=>")
 right_widgets = %w(autocompleter billboard calendar colorpicker dialog in-edit lightbox rater resizable selectable slider sortable tabs tooltips uploader)
 
 #----------------------------------------------------------------------------
