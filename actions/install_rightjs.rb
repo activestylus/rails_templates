@@ -23,9 +23,9 @@ inside "public/javascripts" do
     right_widgets.each do |widget, index|
       unless chosen_widgets == nil
         if chosen_widgets == "all"
-          get "http://rightjs.org/builds/ui/right-#{widget}.js", "right-#{widget}.js"
+          get "http://rightjs.org/builds/ui/right-#{widget}.js", "#{widget}.js"
         elsif eval(chosen_widgets).include?(index + 1)
-          get "http://rightjs.org/builds/ui/right-#{widget}.js", "right-#{widget}.js"
+          get "http://rightjs.org/builds/ui/right-#{widget}.js", "#{widget}.js"
         end
       end 
     end
